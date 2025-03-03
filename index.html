@@ -1,24 +1,7 @@
-import requests
-
-# 設定學員名單的 URL
-url = "https://mde.tw/list/2b.txt"
-
-# 透過 requests 取得網頁內容
-response = requests.get(url)
-
-# 確保請求成功
-if response.status_code == 200:
-    # 按行分割內容並存入 data 陣列
-    data = response.text.splitlines()
-
-    # 檢查 data 是否有內容
-    if len(data) > 1:
-        # 跳過標題行，只取有效學員資料
-        all_stud = data[1:]
-
-        # 印出學員總數
-        print(f"總共有 {len(all_stud)} 名學員")
-    else:
-        print("無有效學員資料")
-else:
-    print("無法取得學員名單，請檢查 URL 是否正確")
+<html>
+<head>
+<meta http-equiv="refresh" content="0; url=content/index.html" />
+</head>
+<body>
+</body>
+</html>
