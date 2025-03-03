@@ -53,14 +53,109 @@
 <h2>HW3</h2>
 <p>HW3 (20%):<span style="background-color: #ffff00;">建立 Webots 桌上籃球遊戲機模擬系統</span></p>
 <p>操作影片標題: 國立虎尾科技大學 - 機械設計工程系 - cd2025 HW3 - 學員學號</p>
-<h2>每週進度和影片</h2>
-<p><strong>W1</strong></p>
+<h1>Tasks</h1>
+<h2><strong>Task1</strong></h2>
 <p>links：<strong> <a href="https://youtu.be/v-wsIs3rqmQ">https://youtu.be/v-wsIs3rqmQ</a></strong></p>
 <p><strong><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/v-wsIs3rqmQ" width="560"></iframe></strong></p>
-<p><strong>W2</strong><strong><br/></strong></p>
+<h2><strong>Task2</strong></h2>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html, document
+import urllib.request
+
+# 學員名單的 URL
+url = "https://mde.tw/list/2b.txt"
+
+# 讀取網頁內容
+response = urllib.request.urlopen(url)
+data = response.read()  # 先讀取
+
+# 如果是 bytes，才解碼
+if isinstance(data, bytes):
+    data = data.decode("utf-8")
+
+# 分行
+data = data.splitlines()
+
+# 確保有資料
+if len(data) &gt; 1:
+    all_stud = data[1:]  # 去掉標題
+    print("總共有 " + str(len(all_stud)) + " 名學員")
+else:
+    print("無有效學員資料")
+    all_stud = []
+
+# 插入 HTML 內容
+brython_div1 = document["brython_div1"]
+
+# 依據學員名單建立超連結
+for i, student in enumerate(all_stud, start=1):
+    student_id = student.strip().split()[0]  # 假設學號在每行的第一個欄位
+    student_link = f"https://mdecd2025.github.io/hw-{student_id}/"
+    
+    # 加入超連結
+    brython_div1 &lt;= f"{i}. " + html.A(student_id, href=student_link)
+    brython_div1 &lt;= html.BR()
+</pre>
+<p><strong> </strong></p>
+<h2><strong>Task3</strong></h2>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html, document
+import urllib.request
+
+# 學員名單的 URL
+student_list_url = "https://mde.tw/list/2b.txt"
+
+# GitHub 倉儲目錄 URL
+github_list_url = "https://github.com/mdecycu/list"
+
+# 讀取學員名單
+response = urllib.request.urlopen(student_list_url)
+data = response.read()
+
+# 如果是 bytes，則解碼
+if isinstance(data, bytes):
+    data = data.decode("utf-8")
+
+# 分行
+data = data.splitlines()
+
+# 檢查資料是否有效
+if len(data) &gt; 1:
+    all_stud = data[1:]  # 去掉標題
+    print("總共有 " + str(len(all_stud)) + " 名學員")
+else:
+    print("無有效學員資料")
+    all_stud = []
+
+# 插入 HTML 內容
+brython_div1 = document["brython_div1"]
+
+# 建立學員超連結（直排顯示）
+for index, student in enumerate(all_stud, start=1):
+    student_id = student.strip().split()[0]  # 假設學號是每行的第一個欄位
+    
+    # 個人網站超連結
+    personal_site = f"https://mdecd2025.github.io/hw-{student_id}/"
+    personal_link = html.A(student_id, href=personal_site, target="_blank")
+    
+    # GitHub 倉儲超連結
+    github_repo = f"{github_list_url}/hw-{student_id}"
+    github_link = html.A("[GitHub]", href=github_repo, target="_blank")
+    
+    # 每行顯示序號，學員網站連結與 GitHub 連結在同一行
+    line = html.P()
+    line &lt;= f"{index}. "  # 插入序號
+    line &lt;= personal_link  # 插入學員網站連結
+    line &lt;= " | "  # 插入分隔符
+    line &lt;= github_link  # 插入 GitHub 連結
+
+    # 最後將這一行添加到容器中
+    brython_div1 &lt;= line
+</pre>
+<p><strong><br/></strong></p>
+<h2><strong>Task4</strong></h2>
 <p><strong></strong></p>
-<p><strong>W3</strong></p>
+<h2><strong>Task5</strong></h2>
 <p><strong></strong></p>
+<h2><strong>Task6</strong></h2>
 <p><strong></strong></p>
 <h1>Midterm</h1>
 <p>本課程所繳交的期中成績為學員自評之學習期望成績.</p>
