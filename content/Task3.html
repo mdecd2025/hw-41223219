@@ -143,59 +143,6 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">Task2 << <a href='Task2.html'>Previous</a> <a href='Task4.html'>Next</a> >> Task4<br /><h1>Task3</h1>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html, document
-import urllib.request
-
-# 學員名單的 URL
-student_list_url = "https://mde.tw/list/2b.txt"
-
-# GitHub 倉儲目錄 URL
-github_list_url = "https://github.com/mdecycu/list"
-
-# 讀取學員名單
-response = urllib.request.urlopen(student_list_url)
-data = response.read()
-
-# 如果是 bytes，則解碼
-if isinstance(data, bytes):
-    data = data.decode("utf-8")
-
-# 分行
-data = data.splitlines()
-
-# 檢查資料是否有效
-if len(data) &gt; 1:
-    all_stud = data[1:]  # 去掉標題
-    print("總共有 " + str(len(all_stud)) + " 名學員")
-else:
-    print("無有效學員資料")
-    all_stud = []
-
-# 插入 HTML 內容
-brython_div1 = document["brython_div1"]
-
-# 建立學員超連結（直排顯示）
-for index, student in enumerate(all_stud, start=1):
-    student_id = student.strip().split()[0]  # 假設學號是每行的第一個欄位
-    
-    # 個人網站超連結
-    personal_site = f"https://mdecd2025.github.io/hw-{student_id}/"
-    personal_link = html.A(student_id, href=personal_site, target="_blank")
-    
-    # GitHub 倉儲超連結
-    github_repo = f"{github_list_url}/hw-{student_id}"
-    github_link = html.A("[GitHub]", href=github_repo, target="_blank")
-    
-    # 每行顯示序號，學員網站連結與 GitHub 連結在同一行
-    line = html.P()
-    line &lt;= f"{index}. "  # 插入序號
-    line &lt;= personal_link  # 插入學員網站連結
-    line &lt;= " | "  # 插入分隔符
-    line &lt;= github_link  # 插入 GitHub 連結
-
-    # 最後將這一行添加到容器中
-    brython_div1 &lt;= line
-</pre>
 <p><strong> </strong></p>
 <br />Task2 << <a href='Task2.html'>Previous</a> <a href='Task4.html'>Next</a> >> Task4</div>
         
