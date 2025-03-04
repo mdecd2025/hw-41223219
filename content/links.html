@@ -147,58 +147,58 @@ img.add_border {
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html, document
 import urllib.request
 
-# 學員名單的 URL
+# 学员名单的 URL
 student_list_url = "https://raw.githubusercontent.com/mdecycu/list/main/2b.txt"
 
-# 讀取學員名單
+# 读取学员名单
 response = urllib.request.urlopen(student_list_url)
 data = response.read()
 
-# 如果是 bytes，則解碼
+# 如果是 bytes，则解码
 if isinstance(data, bytes):
     data = data.decode("utf-8")
 
 # 分行
 data = data.splitlines()
 
-# 檢查數據是否有效
+# 检查数据是否有效
 if len(data) &gt; 0:
-    all_stud = data  # 假設沒有標題行
-    print("總共有 " + str(len(all_stud)) + " 名學員")
+    all_stud = data  # 假设没有标题行
+    print("总共有 " + str(len(all_stud)) + " 名学员")
 else:
-    print("無有效學員資料")
+    print("无有效学员资料")
     all_stud = []
 
 # 插入 HTML 内容
 brython_div1 = document["brython_div1"]
 
-# 創建學員超連結（直排顯示）
+# 创建学员超链接（直排显示）
 for index, student in enumerate(all_stud, start=1):
-    student_info = student.strip().split()  # 以空格分開學號、GitHub 用户名
+    student_info = student.strip().split()  # 以空格分隔学号、GitHub 用户名
 
     if len(student_info) &lt; 2:
-        continue  # 如果數據不完整，則跳過該行
+        continue  # 如果数据不完整，则跳过该行
 
-    student_id = student_info[0]  # 學號
+    student_id = student_info[0]  # 学号
     github_username = student_info[1]  # GitHub 用户名
-    repo_name = f"hw-{github_username}"  # 統一按照 "hw-帳號名稱" 命名
+    repo_name = f"hw-{github_username}"  # 统一按照 "hw-帳號名稱" 命名
 
-    # 個人網站超連結
-    personal_site = f"https://{github_username}.github.io/{repo_name}/"
+    # 个人网站超链接（按照 "https://mdecd2025.github.io/hw-學號/content/index.html"）
+    personal_site = f"https://mdecd2025.github.io/hw-{student_id}/content/index.html"
     personal_link = html.A(student_id, href=personal_site, target="_blank")
 
-    # GitHub 倉儲超連結（固定組織名稱 mdecd2025）
+    # GitHub 仓库超链接（固定组织名称 mdecd2025）
     github_repo = f"https://github.com/mdecd2025/{repo_name}"
     github_link = html.A("[GitHub]", href=github_repo, target="_blank")
 
-    # 每行顯示：序號 學員網站 | GitHub
+    # 每行显示：序号 学员网站 | GitHub
     line = html.P()
-    line &lt;= f"{index}. "  # 插入序號
-    line &lt;= personal_link  # 插入學員網站連結
-    line &lt;= " | "  # 插入分隔符號
-    line &lt;= github_link  # 插入 GitHub 連結
+    line &lt;= f"{index}. "  # 插入序号
+    line &lt;= personal_link  # 插入学员网站链接
+    line &lt;= " | "  # 插入分隔符
+    line &lt;= github_link  # 插入 GitHub 链接
 
-    # 將這一行插入到 HTML 中
+    # 将这一行插入到 HTML 中
     brython_div1 &lt;= line
 </pre>
 <br />HW3 << <a href='HW3.html'>Previous</a> <a href='Tasks.html'>Next</a> >> Tasks</div>
